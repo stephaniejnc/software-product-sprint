@@ -1,9 +1,100 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+.content {
+  font-family: 'Montserrat', sans-serif;
 }
 
 #greeting-container {
-  margin-top: 20px;
+  margin-top: 10px;
+  color: #42474b;
 }
+
+#centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  min-height: 100vh;
+}
+
+#hello {
+  font-size: 4em;
+  color:#0184ff;
+  margin-left: 25%;
+}
+
+#intro {
+  font-style: bold;
+  line-height: 150%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+/* from previous website */
+
+.link {
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.devpost {
+  background-image: url('http://nealrs.github.io/devpost-follow-button/icon/devpost-512.png');
+}
+
+.github {
+  background-image: url('images/github.png');
+  width: 45px;
+  height: 45px;
+}
+
+.linkedin {
+  background-image: url('images/linkedin.png');
+  width: 45px;
+  height: 45px;
+}
+
+.email {
+  background-image: url('images/email.png');
+  width: 45px;
+  height: 45px;
+}
+
+.facebook {
+  background-image: url('images/facebook.png');
+  width: 45px;
+  height: 45px;
+}
+
+.socialMediaDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 100%
+}
+
+
+/* the following is based from w3schools.com */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* two equal columns that sit next to each other */
+.column {
+  flex: 50%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 15px;
+  vertical-align: middle;
+  width: 15%;
+  height: 20%;
+}
+  

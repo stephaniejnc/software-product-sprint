@@ -15,14 +15,32 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+
+// Get the elements with class="column" for images.html page
+var elements = document.getElementsByClassName("column");
+var i;
+
+function addRandomFact() {
+  const facts =
+      ['is based in Vancouver, BC 🏔',
+       'enjoys fencing, hiking, and skiing! 🤺',
+       'is a logistics coordinator for nwPlus, home to the largest hackathon in Western Canada 👩🏻‍💻', 
+       'has a goldendoodle named Luna! 🐶',
+       'is passionate about empowering girls in tech ✨',
+       'recently transferred to computer science 💻',
+       'loves Studio Ghibli films and Joe Hisaishi pieces 🎶'];
 
   // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const fact = facts[Math.floor(Math.random() * facts.length)];
 
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  greetingContainer.innerText = fact;
+}
+
+function setImages() {
+  // two images per row
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.flex = "15%";
+  }
 }
