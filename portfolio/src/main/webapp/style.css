@@ -27,3 +27,53 @@
   margin-left: 25%;
   margin-right: 25%;
 }
+
+/* from previous website */
+
+.link {
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.devpost {
+  background-image: url('http://nealrs.github.io/devpost-follow-button/icon/devpost-512.png');
+}
+
+.github {
+  background-image: url('images/github.png');
+  width: 45px;
+  height: 45px;
+}
+
+.linkedin {
+  background-image: url('images/linkedin.png');
+  width: 45px;
+  height: 45px;
+}
+
+.email {
+  background-image: url('images/email.png');
+  width: 45px;
+  height: 45px;
+}
+
+.facebook {
+  background-image: url('images/facebook.png');
+  width: 45px;
+  height: 45px;
+}
+
+.socialMediaDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 100%
+  }
+
+  
