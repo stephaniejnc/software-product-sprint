@@ -15,6 +15,11 @@
 /**
  * Adds a random greeting to the page.
  */
+
+// Get the elements with class="column" for images.html page
+var elements = document.getElementsByClassName("column");
+var i;
+
 function addRandomFact() {
   const facts =
       ['is based in Vancouver, BC 🏔',
@@ -31,4 +36,11 @@ function addRandomFact() {
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = fact;
+}
+
+function setImages() {
+  // two images per row
+  for (i = 0; i < elements.length; i++) {
+    elements[i].style.flex = "15%";
+  }
 }
