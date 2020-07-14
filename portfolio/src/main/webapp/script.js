@@ -82,3 +82,27 @@ function addGreetingToDom(greeting) {
   const greetingContainer = document.getElementById('hello-container');
   greetingContainer.innerText = greeting;
 }
+
+/** Adds JSON string from server to the DOM. */
+function getJsonData() {
+
+    fetch('/data').then(response => response.json()).then((json) => {
+      console.log('Fetching JSON string from the server.');
+      console.log(json);
+      const listElement = document.getElementById('json-string-container');
+      listElement.innerHTML = '';
+      listElement.appendChild(
+        createListElement('First quote: ' + json[0]));
+      listElement.appendChild(
+        createListElement('Second quote: ' + json[1]));
+      listElement.appendChild(
+        createListElement('Third quote: ' + json[2]));
+    });
+}
+
+/** Creates an <li> element containing text for strings */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
