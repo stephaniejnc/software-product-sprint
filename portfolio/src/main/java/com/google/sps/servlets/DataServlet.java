@@ -27,20 +27,14 @@ import java.util.ArrayList;
 
 public class DataServlet extends HttpServlet {
 
-  ArrayList<String> list = new ArrayList<String>();
+  private ArrayList<String> comments = new ArrayList<String>();
 
+  // gets data from server
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    list.add("This is a string inside DataServlet.java");
-    list.add("The doGet function returns this array as a JSON string!");
-    list.add("script.js fetches the JSON string from the server.");
-
-    // response.setContentType("text/html;");
-    // response.getWriter().println("Hello Stephanie!");
-
-    // Convert the hard-coded arraylist to JSON
-    String json = convertToJsonUsingGson(list);
+    // convert array list to JSON
+    String json = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
     response.setContentType("application/json;");
@@ -55,6 +49,24 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(list);
     return json;
+  }
+
+  // pushes data onto server
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // this will be executed after the user clicks the "Submit" button
+
+    // getting user comment and populating comments data structure
+    String comment = getUserComment(request);
+    comments.add(comment);
+
+    // send back to home page
+    response.sendRedirect("/index.html");
+  }
+
+  private String getUserComment(HttpServletRequest request) {
+    // gets user input from the form
+    return request.getParameter("comment");
   }
 }
 

@@ -12,6 +12,11 @@
     color: #0184ff;
 }
 
+#comments-container {
+    margin-top: 20px;
+    background-color: azure;
+}
+
 #centered {
   display: flex;
   flex-direction: column;

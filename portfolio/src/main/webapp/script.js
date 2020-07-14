@@ -106,3 +106,24 @@ function createListElement(text) {
   liElement.innerText = text;
   return liElement;
 }
+
+/** Displays comments from server */
+function getComments() {
+    fetch('/data').then(response => response.json()).then((json) => {
+      console.log("Fetching comments from the server.");
+      console.log(json);
+      const commentsContainer = document.getElementById('comments-container');
+      commentsContainer.innerHTML = '';
+      for (var i = 0; i < json.length; i++) {
+        commentsContainer.appendChild(
+          createParagraphElement(json[i]));
+      }
+    });
+}
+
+/** Creates an <li> element containing text for strings */
+function createParagraphElement(text) {
+  const paraElement = document.createElement('P');
+  paraElement.innerText = text;
+  return paraElement;
+}
