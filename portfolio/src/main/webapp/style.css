@@ -2,9 +2,14 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-#greeting-container {
+#fact-container {
   margin-top: 10px;
   color: #42474b;
+}
+
+#hello-container {
+    margin-top: 10px;
+    color: #0184ff;
 }
 
 #centered {

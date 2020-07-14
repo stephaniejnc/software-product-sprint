@@ -30,12 +30,12 @@ function addRandomFact() {
        'recently transferred to computer science 💻',
        'loves Studio Ghibli films and Joe Hisaishi pieces 🎶'];
 
-  // Pick a random greeting.
+  // Pick a random fact.
   const fact = facts[Math.floor(Math.random() * facts.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = fact;
+  const factContainer = document.getElementById('fact-container');
+  factContainer.innerText = fact;
 }
 
 function setImages() {
@@ -43,4 +43,42 @@ function setImages() {
   for (i = 0; i < elements.length; i++) {
     elements[i].style.flex = "15%";
   }
+}
+
+
+/**
+ * Fetches the hello greeting from the server and adds it to the DOM.
+ */
+function getGreeting() {
+  console.log('Fetching a greeting!');
+
+  // The fetch() function returns a Promise because the request is asynchronous.
+  const responsePromise = fetch('/data');
+
+  // When the request is complete, pass the response into handleResponse().
+  responsePromise.then(handleResponse);
+}
+
+/**
+ * Handles response by converting it to text and passing the result to
+ * addGreetingToDom().
+ */
+function handleResponse(response) {
+  console.log('Handling the response.');
+
+  // response.text() returns a Promise, because the response is a stream of
+  // content and not a simple variable.
+  const textPromise = response.text();
+
+  // When the response is converted to text, pass the result into the
+  // addGreetingToDom() function.
+  textPromise.then(addGreetingToDom);
+}
+
+/** Adds the greeting to the DOM. */
+function addGreetingToDom(greeting) {
+  console.log('Adding quote to dom: ' + greeting);
+
+  const greetingContainer = document.getElementById('hello-container');
+  greetingContainer.innerText = greeting;
 }
