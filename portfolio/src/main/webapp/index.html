@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComments()">
       <div>
     <div id="centered" class="content">
       <div style="text-align: left">
@@ -23,11 +23,30 @@
 
       <p>Click <a href="javascript:addRandomFact();" style="text-decoration:none;">here</a> to get a random fact!</p>
       <p>Stephanie...
-        <div id="greeting-container">
+        <div id="fact-container">
             
         </div>
       </p>
+      <!-- 
+      <p>Click <a href="javascript:getGreeting();" style="text-decoration:none;">here</a> to say hello!</p>
+        <div id="hello-container">
+        
+        </div>
+      </p>
+      -->
+
+      <ul id="json-string-container"></ul>
       
+      <form action="/data" method="POST">
+        <label for="comment">Add a comment:</label><br>
+        <input type="text" name="comment"><br>
+        <input type="submit" />
+      </form>
+
+      <div id="comments-container">
+
+      </div>
+
       </div>
     </div>
     </div>

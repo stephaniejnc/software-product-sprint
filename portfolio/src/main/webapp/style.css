@@ -2,9 +2,19 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-#greeting-container {
+#fact-container {
   margin-top: 10px;
   color: #42474b;
+}
+
+#hello-container {
+    margin-top: 10px;
+    color: #0184ff;
+}
+
+#comments-container {
+    margin-top: 20px;
+    background-color: azure;
 }
 
 #centered {
@@ -96,5 +106,9 @@
   vertical-align: middle;
   width: 15%;
   height: 20%;
+}
+
+#json-string-container {
+  margin-top: 20px;
 }
   
