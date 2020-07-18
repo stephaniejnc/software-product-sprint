@@ -107,21 +107,32 @@ function createListElement(text) {
   return liElement;
 }
 
-/** Displays comments from server */
-function getComments() {
-    fetch('/data').then(response => response.json()).then((json) => {
-      console.log("Fetching comments from the server.");
-      console.log(json);
-      const commentsContainer = document.getElementById('comments-container');
-      commentsContainer.innerHTML = '';
-      for (var i = 0; i < json.length; i++) {
-        commentsContainer.appendChild(
-          createParagraphElement(json[i]));
-      }
-    });
+/** Hide commends by default, fetch login status from servelet */
+function getLoginStatus() {
+  fetch('/loginstatus').then(response => response.json()).then((isLoggedIn) => {
+    console.log("Fetching login status from the server.");
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+        getComments();
+    }
+  });
 }
 
-/** Creates an <li> element containing text for strings */
+/** Displays comments from server */
+function getComments() {
+  fetch('/data').then(response => response.json()).then((json) => {
+    console.log("Fetching comments from the server.");
+    console.log(json);
+    const commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = '';
+    for (var i = 0; i < json.length; i++) {
+      commentsContainer.appendChild(
+      createParagraphElement(json[i]));
+    }
+  });
+}
+
+/** Creates an <p> element containing text for strings */
 function createParagraphElement(text) {
   const paraElement = document.createElement('P');
   paraElement.innerText = text;

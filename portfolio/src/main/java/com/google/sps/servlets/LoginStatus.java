@@ -33,6 +33,7 @@ public class LoginStatus extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     response.setContentType("text/html");
+    boolean isLoggedIn = false;
 
     // create instance of userservice
     UserService userService = UserServiceFactory.getUserService();
@@ -46,6 +47,8 @@ public class LoginStatus extends HttpServlet {
 
       response.getWriter().println("<p>Hello " + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
+
+      isLoggedIn = true;
     } else {
       String urlToRedirectToAfterUserLogsIn = "/";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
@@ -53,7 +56,12 @@ public class LoginStatus extends HttpServlet {
       response.getWriter().println("<p>Hello stranger.</p>");
       response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
     }
+
+    // send response to script.js
+    response.setContentType("application/json");
+    response.getWriter().println(isLoggedIn);
   }
+
 }
 
 
