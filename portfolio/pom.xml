@@ -31,7 +31,7 @@
       <version>2.8.6</version>
     </dependency>
 
-    <!-- Maven/App Engine dependency, incl. Datastore -->
+    <!-- Maven/App Engine dependency, incl. Datastore, Users API -->
     <dependency>
       <groupId>com.google.appengine</groupId>
       <artifactId>appengine-api-1.0-sdk</artifactId>
