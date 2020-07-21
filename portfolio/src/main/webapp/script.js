@@ -109,10 +109,10 @@ function createListElement(text) {
 
 /** Hide commends by default, fetch login status from servelet */
 function getLoginStatus() {
-  fetch('/loginstatus').then(response => response.json()).then((isLoggedIn) => {
+  fetch('/loginboolean').then(response => response.json()).then((object) => {
     console.log("Fetching login status from the server.");
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
+    console.log(object);
+    if (object.boolean) {
         getComments();
     }
   });

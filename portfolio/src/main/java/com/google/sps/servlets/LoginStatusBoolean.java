@@ -24,37 +24,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns the login status of the user */
-@WebServlet("/loginstatus")
+@WebServlet("/loginboolean")
 
 // originally adapted from example
 
-public class LoginStatus extends HttpServlet {
+public class LoginStatusBoolean extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    response.setContentType("text/html");
+    JSONObject object = new JSONObject();
+    response.setContentType("application/json");
 
     // create instance of userservice
     UserService userService = UserServiceFactory.getUserService();
 
     // if user is logged in, show email greeting
     // else if user is not logged in, show generic greeting
-    if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
-      String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
-
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
-      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-
-    } else {
-      String urlToRedirectToAfterUserLogsIn = "/";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-
-      response.getWriter().println("<p>Hello stranger.</p>");
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
-    }
+    object.put("boolean", userService.isUserLoggedIn());
+    response.getWriter().println(object);
 
   }
 
