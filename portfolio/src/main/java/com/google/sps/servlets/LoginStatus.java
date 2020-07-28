@@ -33,10 +33,20 @@ public class LoginStatus extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    response.setContentType("text/html");
+    String query_string = request.getQueryString();
 
     // create instance of userservice
     UserService userService = UserServiceFactory.getUserService();
+
+    if (query_string != null) {
+        response.setContentType("application/json");
+        JSONObject object = new JSONObject();
+        object.put("boolean", userService.isUserLoggedIn());
+        response.getWriter().println(object);
+        return;
+    }    
+
+    response.setContentType("text/html");
 
     // if user is logged in, show email greeting
     // else if user is not logged in, show generic greeting
@@ -45,7 +55,7 @@ public class LoginStatus extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
+      response.getWriter().println("<p style=\"color:red;\">Hello " + userEmail + "!</p>");
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
 
     } else {
