@@ -88,7 +88,7 @@ public class DataServlet extends HttpServlet {
 
     // getting user comment and populating comments data structure
     long timestamp = System.currentTimeMillis();
-    String comment = getParameter(request, "text-input", "");
+    String comment = getParameter(request, "comment", "");
     // comments.add(comment);
 
     // create new Entity instance of kind UpdatedComment

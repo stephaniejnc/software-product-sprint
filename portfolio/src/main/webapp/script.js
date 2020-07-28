@@ -127,14 +127,14 @@ function getComments() {
     commentsContainer.innerHTML = '';
     for (var i = 0; i < json.length; i++) {
       commentsContainer.appendChild(
-      createParagraphElement(json[i]));
+      createParagraphElement(json[i].email, json[i].commentText));
     }
   });
 }
 
 /** Creates an <p> element containing text for strings */
-function createParagraphElement(text) {
+function createParagraphElement(email, comment) {
   const paraElement = document.createElement('P');
-  paraElement.innerText = text;
+  paraElement.innerText = email + ": " + comment;
   return paraElement;
 }
