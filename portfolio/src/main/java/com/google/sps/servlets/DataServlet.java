@@ -27,24 +27,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Objects; 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import org.json.simple.JSONObject;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 
 public class DataServlet extends HttpServlet {
 
+  private class Comment {
+        String commentText;
+        String email;
+    }
+
   // gets data from server
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-    ArrayList<String> comments = new ArrayList<String>();
+    ArrayList<Comment> comments = new ArrayList<>();
 
     // load comment entities
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("UpdatedComment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+
     for (Entity entity : results.asIterable()) {
-      String comment = (String) entity.getProperty("comment");
+      Comment comment = new Comment();
+      String commentText = (String) entity.getProperty("comment");
+      String email = (String) entity.getProperty("email");
+      comment.commentText = commentText;
+      comment.email = email;
       comments.add(comment);
     }
 
@@ -52,7 +67,7 @@ public class DataServlet extends HttpServlet {
     String json = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
-    response.setContentType("application/json;");
+    response.setContentType("text/html;");
     response.getWriter().println(json);
   }
 
@@ -60,7 +75,7 @@ public class DataServlet extends HttpServlet {
    * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
    * the Gson library dependency to pom.xml.
    */
-  private String convertToJsonUsingGson(ArrayList list) {
+  private String convertToJsonUsingGson(ArrayList<Comment> list) {
     Gson gson = new Gson();
     String json = gson.toJson(list);
     return json;
@@ -73,13 +88,24 @@ public class DataServlet extends HttpServlet {
 
     // getting user comment and populating comments data structure
     long timestamp = System.currentTimeMillis();
-    String comment = getUserComment(request);
+    String comment = getParameter(request, "text-input", "");
     // comments.add(comment);
 
-    // create new Entity instance of kind Comment
-    Entity commentEntity = new Entity("Comment");
+    // create new Entity instance of kind UpdatedComment
+    Entity commentEntity = new Entity("UpdatedComment");
+    // get email from current user
+    UserService userService = UserServiceFactory.getUserService();
+    String email;
+
+    if (userService.isUserLoggedIn()) {
+      email = userService.getCurrentUser().getEmail();
+    } else {
+      email = "";
+    }
+
     commentEntity.setProperty("comment", comment);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("email", email);
 
     // put entity into Datastore
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -92,6 +118,14 @@ public class DataServlet extends HttpServlet {
   private String getUserComment(HttpServletRequest request) {
     // gets user input from the form
     return request.getParameter("comment");
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }
 
