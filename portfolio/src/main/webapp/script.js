@@ -107,23 +107,34 @@ function createListElement(text) {
   return liElement;
 }
 
-/** Displays comments from server */
-function getComments() {
-    fetch('/data').then(response => response.json()).then((json) => {
-      console.log("Fetching comments from the server.");
-      console.log(json);
-      const commentsContainer = document.getElementById('comments-container');
-      commentsContainer.innerHTML = '';
-      for (var i = 0; i < json.length; i++) {
-        commentsContainer.appendChild(
-          createParagraphElement(json[i]));
-      }
-    });
+/** Hide commends by default, fetch login status from servelet */
+function getLoginStatus() {
+  fetch('/loginstatus?loginboolean=true').then(response => response.json()).then((object) => {
+    console.log("Fetching login status from the server.");
+    console.log(object);
+    if (object.boolean) {
+        getComments();
+    }
+  });
 }
 
-/** Creates an <li> element containing text for strings */
-function createParagraphElement(text) {
+/** Displays comments from server */
+function getComments() {
+  fetch('/data').then(response => response.json()).then((json) => {
+    console.log("Fetching comments from the server.");
+    console.log(json);
+    const commentsContainer = document.getElementById('comments-container');
+    commentsContainer.innerHTML = '';
+    for (var i = 0; i < json.length; i++) {
+      commentsContainer.appendChild(
+      createParagraphElement(json[i].email, json[i].commentText));
+    }
+  });
+}
+
+/** Creates an <p> element containing text for strings */
+function createParagraphElement(email, comment) {
   const paraElement = document.createElement('P');
-  paraElement.innerText = text;
+  paraElement.innerText = email + ": " + comment;
   return paraElement;
 }

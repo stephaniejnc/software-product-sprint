@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
-  <body onload="getComments()">
+  <body onload="getLoginStatus()">
       <div>
     <div id="centered" class="content">
       <div style="text-align: left">
@@ -38,8 +38,8 @@
       <ul id="json-string-container"></ul>
       
       <form action="/data" method="POST">
-        <label for="comment">Add a comment:</label><br>
-        <input type="text" name="comment"><br>
+        <br><label for="comment">Add a comment:</label><br><br>
+        <input type="text" name="comment">
         <input type="submit" />
       </form>
 

@@ -14,7 +14,11 @@
 
 #comments-container {
     margin-top: 20px;
-    background-color: azure;
+    background-color: #f7fbff;
+    font-weight: lighter;
+    color: #42474b;
+    border-radius: 20px;
+    text-indent: 10px;
 }
 
 #centered {
@@ -111,4 +115,38 @@
 #json-string-container {
   margin-top: 20px;
 }
-  
+
+input[type=text] {
+  font-family: 'Montserrat', sans-serif;
+  width: 80%;
+  border-radius: 10px;
+  padding: 0.35em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+input[type=submit] {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 10px;
+  padding: 0.35em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color:#42474b;
+  text-align: center;
+  transition: all 0.2s;
+ }
+
+input[type=submit]:hover {
+  color: #ffffff;
+  background-color: #0184ff;
+}
+@media all and (max-width:30em){
+ input[type=submit]{
+  display:block;
+  margin:0.4em auto;
+  }
+}
